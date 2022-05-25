@@ -1,0 +1,782 @@
+{
+  "address": "0x86c71a1Fd390346998beF4ee18Cd57C15e5d0d51",
+  "abi": [
+    {
+      "type": "constructor",
+      "payable": false,
+      "inputs": [
+        { "type": "address", "name": "_mainTokenAddress" },
+        { "type": "address", "name": "_uniswapRouterAddress" },
+        { "type": "address", "name": "_USDCAddress" },
+        { "type": "address", "name": "_treasuryWalletAddress" },
+        { "type": "address", "name": "_marketingWalletAddress" },
+        { "type": "address", "name": "_liquidityWalletAddress" },
+        { "type": "address", "name": "_bondDepoWalletAddress" },
+        { "type": "address", "name": "_secondServiceWalletAddress" },
+        { "type": "address", "name": "_thirdServiceWalletAddress" }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "OwnershipTransferred",
+      "inputs": [
+        { "type": "address", "name": "previousOwner", "indexed": true },
+        { "type": "address", "name": "newOwner", "indexed": true }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "changeAssetManagerAddress",
+      "inputs": [
+        { "type": "address", "name": "_addr", "indexed": true },
+        { "type": "bool", "name": "_isAssetManager", "indexed": false }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "changeEcosystemAddress",
+      "inputs": [
+        { "type": "address", "name": "_addr", "indexed": true },
+        { "type": "bool", "name": "_isEcosystem", "indexed": false }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "_changeAssetManagerList",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "address", "name": "_addr" },
+        { "type": "bool", "name": "_access" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "_changeEcosystemList",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "address", "name": "_addr" },
+        { "type": "bool", "name": "_access" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "activateBondTerm",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "uint256", "name": "_bondID" },
+        { "type": "bool", "name": "_active" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "addBondTerm",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "string", "name": "_assetBonded" },
+        { "type": "uint256", "name": "_tokenPrice" },
+        { "type": "uint256", "name": "_totalAmount" },
+        { "type": "uint256", "name": "_vestingTerm" },
+        { "type": "bool", "name": "_active" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "changeAssetManagerList",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "address", "name": "_addr" },
+        { "type": "bool", "name": "_access" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "changeEcosystemList",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "address", "name": "_addr" },
+        { "type": "bool", "name": "_access" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "claimBond",
+      "constant": false,
+      "payable": false,
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "createBondAndPullToLeverage",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "address", "name": "_userAddress" },
+        { "type": "uint256", "name": "_tokensToBond" },
+        { "type": "uint256", "name": "_bondID" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "getActiveByBondID",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "uint256", "name": "_bondID" }],
+      "outputs": [{ "type": "bool" }]
+    },
+    {
+      "type": "function",
+      "name": "getAmountLeftByBondID",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "uint256", "name": "_bondID" }],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getAssetBondedByBondID",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "uint256", "name": "_bondID" }],
+      "outputs": [{ "type": "string" }]
+    },
+    {
+      "type": "function",
+      "name": "getBondDepoTokenAmount",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBondDepoUSDCAmount",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBondDepoWETHAmount",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBondHolderAssetBonded",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_bondHolder" }],
+      "outputs": [{ "type": "string" }]
+    },
+    {
+      "type": "function",
+      "name": "getBondHolderAveragePriceOfVestingBonds",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_bondHolder" }],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBondHolderBondingTime",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_bondHolder" }],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBondHolderBondsClaimedToDate",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_bondHolder" }],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBondHolderInfo",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_bondHolder" }],
+      "outputs": [
+        {
+          "type": "tuple",
+          "components": [
+            { "type": "address", "name": "bondHolder" },
+            { "type": "uint256", "name": "lastPurchasedBondID" },
+            { "type": "uint256", "name": "tokensVesting" },
+            { "type": "string", "name": "assetBonded" },
+            { "type": "uint256", "name": "averagePriceOfVestingBonds" },
+            { "type": "uint256", "name": "bondingTime" },
+            { "type": "uint256", "name": "vestingTimeRemaining" },
+            { "type": "uint256", "name": "bondsClaimedToDate" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "getBondHolderInfoAddress",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_bondHolder" }],
+      "outputs": [{ "type": "address" }]
+    },
+    {
+      "type": "function",
+      "name": "getBondHolderLastPurchasedBondID",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_bondHolder" }],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBondHolderTokenVesting",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_bondHolder" }],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBondHolderVestingTimeRemaining",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_bondHolder" }],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBondTermByBondID",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "uint256", "name": "_bondID" }],
+      "outputs": [
+        {
+          "type": "tuple",
+          "components": [
+            { "type": "uint256", "name": "bondID" },
+            { "type": "string", "name": "assetBonded" },
+            { "type": "uint256", "name": "tokenPrice" },
+            { "type": "uint256", "name": "totalAmount" },
+            { "type": "uint256", "name": "amountLeft" },
+            { "type": "uint256", "name": "vestingTerm" },
+            { "type": "bool", "name": "active" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "getBondTermCurrentROIByID",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "uint256", "name": "_bondID" }],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBondingDepoTokenBalanceAvalible",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBondingDepoTotalTokenBalance",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getLastBondingTermID",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getLowestActiveBondingTermID",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getNumberOfActiveBondingTerms",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getTime",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getTokenPriceByBondID",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "uint256", "name": "_bondID" }],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getTotalAmountByBondID",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "uint256", "name": "_bondID" }],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getTotalBondsAvalibleToBuyNow",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getTotalBondsClaimedToDate",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getTotalBondsVestingNow",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getTotalNumberOfBondingTerms",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getUnlockTime",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getUserCurrentlyBondingROIByAddress",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_bondHolder" }],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getVestingTermByBondID",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "uint256", "name": "_bondID" }],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "isAssetManager",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_addr" }],
+      "outputs": [{ "type": "bool" }]
+    },
+    {
+      "type": "function",
+      "name": "isEcosystem",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_addr" }],
+      "outputs": [{ "type": "bool" }]
+    },
+    {
+      "type": "function",
+      "name": "lock",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "uint256", "name": "time" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "owner",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "address" }]
+    },
+    {
+      "type": "function",
+      "name": "ownerCreateTeamBond",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "uint256", "name": "_tokensBonded" },
+        { "type": "address", "name": "_bondRecepientAddress" },
+        { "type": "uint256", "name": "_vestingTerm" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "pullFromBondToLeverage",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "address", "name": "_userAddress" },
+        { "type": "uint256", "name": "_collateralFromBonds" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "purchaseBond",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "uint256", "name": "_bondID" },
+        { "type": "uint256", "name": "_tokensBonded" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "renounceOwnership",
+      "constant": false,
+      "payable": false,
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setAddressesAndEcosystem",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "address", "name": "_mainTokenAddress" },
+        { "type": "address", "name": "_dividendTrackerAddress" },
+        { "type": "address", "name": "_priceFetcherAddress" },
+        { "type": "address", "name": "_treasuryContractAddress" },
+        { "type": "address", "name": "_taxManagerAddress" },
+        { "type": "address", "name": "_bondDepositoryAddress" },
+        { "type": "address", "name": "_secondServiceContractAddress" },
+        { "type": "address", "name": "_thirdServiceContractAddress" },
+        { "type": "address", "name": "_metricsTrackerAddress" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "transferOwnership",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "newOwner" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "transferTokensToBondingWallet",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "uint256", "name": "_amount" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "transferTokensToTreasuryWallet",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "uint256", "name": "_amount" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "transferUSDCToBondingWallet",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "uint256", "name": "_amount" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "transferUSDCToTreasuryWallet",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "uint256", "name": "_amount" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "transferWETHToBondingWallet",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "uint256", "name": "_amount" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "transferWETHToTreasuryWallet",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "uint256", "name": "_amount" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "unlock",
+      "constant": false,
+      "payable": false,
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateBondDepoWalletAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newBondDepoWalletAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateBondDepositoryAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newBondDepositoryAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateDividendTrackerAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newDividendTrackerAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateLiquidityWalletAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newLiquidityWalletAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateMainContractAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newMainTokenAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateMarketingWalletAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newMarketingWalletAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updatePriceFetcherAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newPriceFetcherAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateReflectionSettings",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "bool", "name": "_reflectiveBonds" },
+        { "type": "bool", "name": "_premiumBPSReflection" },
+        { "type": "uint256", "name": "_dividendFeeBPS" },
+        { "type": "uint256", "name": "_liquidityFeeBPS" },
+        { "type": "uint256", "name": "_marketingFeeBPS" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateSecondServiceContractAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "address", "name": "_newSecondServiceContractAddress" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateSecondServiceWalletAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "address", "name": "_newSecondServiceWalletAddress" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateTaxManagerAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newTaxManagerAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateThirdServiceWalletAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "address", "name": "_newThirdServiceWalletAddress" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateTreasuryContractAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newTreasuryContractAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateTreasuryWalletAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newTreasuryWalletAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateUSDCAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newUSDCAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateUniswapFactoryAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newUniswapFactoryAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateUniswapPairAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newUniswapPairAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateUniswapRouterAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newUniswapRouterAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateWETHAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newWETHAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updatemetricsTracker",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newmetricsTrackerAddress" }],
+      "outputs": []
+    }
+  ]
+}

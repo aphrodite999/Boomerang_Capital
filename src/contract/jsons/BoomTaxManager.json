@@ -1,0 +1,1334 @@
+{
+  "address": "0x845F58ae5539ea34Fdf8C31E909CCCE3cdE5822F",
+  "abi": [
+    {
+      "type": "constructor",
+      "payable": false,
+      "inputs": [
+        { "type": "address", "name": "_mainTokenAddress" },
+        { "type": "address", "name": "_uniswapRouterAddress" },
+        { "type": "address", "name": "_USDCAddress" },
+        { "type": "address", "name": "_treasuryWalletAddress" },
+        { "type": "address", "name": "_marketingWalletAddress" },
+        { "type": "address", "name": "_liquidityWalletAddress" },
+        { "type": "address", "name": "_bondDepoWalletAddress" },
+        { "type": "address", "name": "_secondServiceWalletAddress" },
+        { "type": "address", "name": "_thirdServiceWalletAddress" }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "OwnershipTransferred",
+      "inputs": [
+        { "type": "address", "name": "previousOwner", "indexed": true },
+        { "type": "address", "name": "newOwner", "indexed": true }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "changeAssetManagerAddress",
+      "inputs": [
+        { "type": "address", "name": "_addr", "indexed": true },
+        { "type": "bool", "name": "_isAssetManager", "indexed": false }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "changeEcosystemAddress",
+      "inputs": [
+        { "type": "address", "name": "_addr", "indexed": true },
+        { "type": "bool", "name": "_isEcosystem", "indexed": false }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "_changeAssetManagerList",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "address", "name": "_addr" },
+        { "type": "bool", "name": "_access" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "_changeEcosystemList",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "address", "name": "_addr" },
+        { "type": "bool", "name": "_access" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "changeAssetManagerList",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "address", "name": "_addr" },
+        { "type": "bool", "name": "_access" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "changeEcosystemList",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "address", "name": "_addr" },
+        { "type": "bool", "name": "_access" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "getAmountInHoldersWallets",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getAmountOfTokensCompoundingInDividendTracker",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getAmountOfTokensForBonding",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getAmountOfTokensInBondingDepo",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getAmountOfTokensInLP",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getAmountOfTokensInTreasury",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBuyZone1DividendFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBuyZone1LiquidityFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBuyZone1MarketingFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBuyZone1TaxRegime",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "tuple",
+          "components": [
+            { "type": "uint256", "name": "treasuryFeeShareBPS" },
+            { "type": "uint256", "name": "dividendFeeShareBPS" },
+            { "type": "uint256", "name": "liquidityFeeShareBPS" },
+            { "type": "uint256", "name": "marketingFeeShareBPS" },
+            { "type": "uint256", "name": "totalBuyFeeBPS" },
+            { "type": "uint256", "name": "totalSellFeeBPS" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "getBuyZone1TotalBuyFeeBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBuyZone1TotalSellFeeBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBuyZone1TreasuryFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBuyZone2DividendFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBuyZone2LiquidityFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBuyZone2MarketingFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBuyZone2TaxRegime",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "tuple",
+          "components": [
+            { "type": "uint256", "name": "treasuryFeeShareBPS" },
+            { "type": "uint256", "name": "dividendFeeShareBPS" },
+            { "type": "uint256", "name": "liquidityFeeShareBPS" },
+            { "type": "uint256", "name": "marketingFeeShareBPS" },
+            { "type": "uint256", "name": "totalBuyFeeBPS" },
+            { "type": "uint256", "name": "totalSellFeeBPS" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "getBuyZone2TotalBuyFeeBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBuyZone2TotalSellFeeBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getBuyZone2TreasuryFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getCirculatingSupply",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentBackingPrice",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentBuyZone1TopPrice",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentBuyZone1TopPriceMultiplierBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentBuyZone2TopPrice",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentBuyZone2TopPriceMultiplierBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentDividendFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentFairPrice",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentFairPriceMultiplierBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentLiquidityFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentMarketingFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentOpModel",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "tuple",
+          "components": [
+            { "type": "uint256", "name": "treasuryFeeShareBPS" },
+            { "type": "uint256", "name": "dividendFeeShareBPS" },
+            { "type": "uint256", "name": "liquidityFeeShareBPS" },
+            { "type": "uint256", "name": "marketingFeeShareBPS" },
+            { "type": "uint256", "name": "totalBuyFeeBPS" },
+            { "type": "uint256", "name": "totalSellFeeBPS" },
+            { "type": "uint256", "name": "currentPrice" },
+            { "type": "uint256", "name": "backingPrice" },
+            { "type": "uint256", "name": "fairPrice" },
+            { "type": "uint256", "name": "currentBoomTokensInLP" },
+            { "type": "uint256", "name": "currentWETHInLP" },
+            { "type": "uint8", "name": "currentZone" },
+            { "type": "uint256", "name": "currentZoneBottomPrice" },
+            { "type": "uint256", "name": "currentZoneTopPrice" },
+            { "type": "uint256", "name": "buybackLimit" },
+            { "type": "uint256", "name": "sellbackLimit" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentSellZone1BottomPrice",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentSellZone1BottomPriceMultiplierBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentSellZone2BottomPrice",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentSellZone2BottomPriceMultiplierBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentTaxRegime",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "tuple",
+          "components": [
+            { "type": "uint256", "name": "treasuryFeeShareBPS" },
+            { "type": "uint256", "name": "dividendFeeShareBPS" },
+            { "type": "uint256", "name": "liquidityFeeShareBPS" },
+            { "type": "uint256", "name": "marketingFeeShareBPS" },
+            { "type": "uint256", "name": "totalBuyFeeBPS" },
+            { "type": "uint256", "name": "totalSellFeeBPS" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentTotalBuyFeeBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentTotalSellFeeBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentTreasuryFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentZone",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint8" }]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentZoneBottomPrice",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getCurrentZoneTopPrice",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getFairZoneDividendFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getFairZoneLiquidityFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getFairZoneMarketingFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getFairZoneTaxRegime",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "tuple",
+          "components": [
+            { "type": "uint256", "name": "treasuryFeeShareBPS" },
+            { "type": "uint256", "name": "dividendFeeShareBPS" },
+            { "type": "uint256", "name": "liquidityFeeShareBPS" },
+            { "type": "uint256", "name": "marketingFeeShareBPS" },
+            { "type": "uint256", "name": "totalBuyFeeBPS" },
+            { "type": "uint256", "name": "totalSellFeeBPS" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "getFairZoneTotalBuyFeeBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getFairZoneTotalSellFeeBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getFairZoneTreasuryFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getJeetDividendFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getJeetLiquidityFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getJeetMarketingFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getJeetTaxRegime",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "tuple",
+          "components": [
+            { "type": "uint256", "name": "treasuryFeeShareBPS" },
+            { "type": "uint256", "name": "dividendFeeShareBPS" },
+            { "type": "uint256", "name": "liquidityFeeShareBPS" },
+            { "type": "uint256", "name": "marketingFeeShareBPS" },
+            { "type": "uint256", "name": "totalBuyFeeBPS" },
+            { "type": "uint256", "name": "totalSellFeeBPS" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "getJeetTotalBuyFeeBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getJeetTotalSellFeeBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getJeetTreasuryFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getSellZone1DividendFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getSellZone1LiquidityFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getSellZone1MarketingFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getSellZone1TaxRegime",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "tuple",
+          "components": [
+            { "type": "uint256", "name": "treasuryFeeShareBPS" },
+            { "type": "uint256", "name": "dividendFeeShareBPS" },
+            { "type": "uint256", "name": "liquidityFeeShareBPS" },
+            { "type": "uint256", "name": "marketingFeeShareBPS" },
+            { "type": "uint256", "name": "totalBuyFeeBPS" },
+            { "type": "uint256", "name": "totalSellFeeBPS" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "getSellZone1TotalBuyFeeBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getSellZone1TotalSellFeeBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getSellZone1TreasuryFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getSellZone2DividendFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getSellZone2LiquidityFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getSellZone2MarketingFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getSellZone2TaxRegime",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "tuple",
+          "components": [
+            { "type": "uint256", "name": "treasuryFeeShareBPS" },
+            { "type": "uint256", "name": "dividendFeeShareBPS" },
+            { "type": "uint256", "name": "liquidityFeeShareBPS" },
+            { "type": "uint256", "name": "marketingFeeShareBPS" },
+            { "type": "uint256", "name": "totalBuyFeeBPS" },
+            { "type": "uint256", "name": "totalSellFeeBPS" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "getSellZone2TotalBuyFeeBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getSellZone2TotalSellFeeBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getSellZone2TreasuryFeeShareBPS",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getTime",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "getUnlockTime",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "intervalForTreasuryUpdate",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "intervalForZoneAndTaxesUpdate",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "isAssetManager",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_addr" }],
+      "outputs": [{ "type": "bool" }]
+    },
+    {
+      "type": "function",
+      "name": "isEcosystem",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_addr" }],
+      "outputs": [{ "type": "bool" }]
+    },
+    {
+      "type": "function",
+      "name": "lastTreasuryUpdateTime",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "lastZoneAndTaxesUpdateTime",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "uint256" }]
+    },
+    {
+      "type": "function",
+      "name": "lock",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "uint256", "name": "time" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "owner",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [{ "type": "address" }]
+    },
+    {
+      "type": "function",
+      "name": "renounceOwnership",
+      "constant": false,
+      "payable": false,
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setAddressesAndEcosystem",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "address", "name": "_mainTokenAddress" },
+        { "type": "address", "name": "_dividendTrackerAddress" },
+        { "type": "address", "name": "_priceFetcherAddress" },
+        { "type": "address", "name": "_treasuryContractAddress" },
+        { "type": "address", "name": "_taxManagerAddress" },
+        { "type": "address", "name": "_bondDepositoryAddress" },
+        { "type": "address", "name": "_secondServiceContractAddress" },
+        { "type": "address", "name": "_thirdServiceContractAddress" },
+        { "type": "address", "name": "_metricsTrackerAddress" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setBuyZone1TaxRegime",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "uint256", "name": "_treasuryFeeShareBPS" },
+        { "type": "uint256", "name": "_dividendFeeShareBPS" },
+        { "type": "uint256", "name": "_liquidityFeeShareBPS" },
+        { "type": "uint256", "name": "_marketingFeeShareBPS" },
+        { "type": "uint256", "name": "_totalBuyFeeBPS" },
+        { "type": "uint256", "name": "_totalSellFeeBPS" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setBuyZone2TaxRegime",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "uint256", "name": "_treasuryFeeShareBPS" },
+        { "type": "uint256", "name": "_dividendFeeShareBPS" },
+        { "type": "uint256", "name": "_liquidityFeeShareBPS" },
+        { "type": "uint256", "name": "_marketingFeeShareBPS" },
+        { "type": "uint256", "name": "_totalBuyFeeBPS" },
+        { "type": "uint256", "name": "_totalSellFeeBPS" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setCirculatingSupply",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "uint256", "name": "_newCirculatingSupply" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setCurrentPriceRegime",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "uint256", "name": "_treasuryFeeShareBPS" },
+        { "type": "uint256", "name": "_dividendFeeShareBPS" },
+        { "type": "uint256", "name": "_liquidityFeeShareBPS" },
+        { "type": "uint256", "name": "_marketingFeeShareBPS" },
+        { "type": "uint256", "name": "_totalBuyFeeBPS" },
+        { "type": "uint256", "name": "_totalSellFeeBPS" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setFairZoneTaxRegime",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "uint256", "name": "_treasuryFeeShareBPS" },
+        { "type": "uint256", "name": "_dividendFeeShareBPS" },
+        { "type": "uint256", "name": "_liquidityFeeShareBPS" },
+        { "type": "uint256", "name": "_marketingFeeShareBPS" },
+        { "type": "uint256", "name": "_totalBuyFeeBPS" },
+        { "type": "uint256", "name": "_totalSellFeeBPS" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setIncludeSecondService",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "bool", "name": "_include" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setIncludeThirdService",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "bool", "name": "_include" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setJeetTaxRegime",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "uint256", "name": "_treasuryFeeShareBPS" },
+        { "type": "uint256", "name": "_dividendFeeShareBPS" },
+        { "type": "uint256", "name": "_liquidityFeeShareBPS" },
+        { "type": "uint256", "name": "_marketingFeeShareBPS" },
+        { "type": "uint256", "name": "_totalBuyFeeBPS" },
+        { "type": "uint256", "name": "_totalSellFeeBPS" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setManualBuybackLimit",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "uint256", "name": "newBuybackLimit" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setManualManagementMode",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "bool", "name": "_manual" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setManualSellbackLimit",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "uint256", "name": "newSellbackLimit" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setNetOptionsBalanceUpdateMode",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "bool", "name": "_automatic" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setSellZone1TaxRegime",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "uint256", "name": "_treasuryFeeShareBPS" },
+        { "type": "uint256", "name": "_dividendFeeShareBPS" },
+        { "type": "uint256", "name": "_liquidityFeeShareBPS" },
+        { "type": "uint256", "name": "_marketingFeeShareBPS" },
+        { "type": "uint256", "name": "_totalBuyFeeBPS" },
+        { "type": "uint256", "name": "_totalSellFeeBPS" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setSellZone2TaxRegime",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "uint256", "name": "_treasuryFeeShareBPS" },
+        { "type": "uint256", "name": "_dividendFeeShareBPS" },
+        { "type": "uint256", "name": "_liquidityFeeShareBPS" },
+        { "type": "uint256", "name": "_marketingFeeShareBPS" },
+        { "type": "uint256", "name": "_totalBuyFeeBPS" },
+        { "type": "uint256", "name": "_totalSellFeeBPS" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setTotalSupply",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "uint256", "name": "_newTotalSupply" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "transferOwnership",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "newOwner" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "unlock",
+      "constant": false,
+      "payable": false,
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateBondDepoWalletAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newBondDepoWalletAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateBondDepositoryAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newBondDepositoryAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateDividendTrackerAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newDividendTrackerAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateLiquidityWalletAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newLiquidityWalletAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateMainContractAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newMainTokenAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateMarketingWalletAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newMarketingWalletAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateOperatingModel",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "uint256", "name": "_estPriceAfterSwap" },
+        { "type": "uint256", "name": "_estBoomTokensInLPAfterSwap" },
+        { "type": "uint256", "name": "_estWETHInLPAfterSwap" },
+        { "type": "uint256", "name": "_circulatingSupply" },
+        { "type": "bool", "name": "_autoTaxUpdates" },
+        { "type": "bool", "name": "_autoZoneUpdates" },
+        { "type": "bool", "name": "_autoBackingUpdates" },
+        { "type": "bool", "name": "_autoInterventionLimitsUpdates" },
+        { "type": "bool", "name": "_autoTreasuryValueUpdates" }
+      ],
+      "outputs": [
+        {
+          "type": "tuple",
+          "components": [
+            { "type": "uint256", "name": "treasuryFeeShareBPS" },
+            { "type": "uint256", "name": "dividendFeeShareBPS" },
+            { "type": "uint256", "name": "liquidityFeeShareBPS" },
+            { "type": "uint256", "name": "marketingFeeShareBPS" },
+            { "type": "uint256", "name": "totalBuyFeeBPS" },
+            { "type": "uint256", "name": "totalSellFeeBPS" },
+            { "type": "uint256", "name": "currentPrice" },
+            { "type": "uint256", "name": "backingPrice" },
+            { "type": "uint256", "name": "fairPrice" },
+            { "type": "uint256", "name": "currentBoomTokensInLP" },
+            { "type": "uint256", "name": "currentWETHInLP" },
+            { "type": "uint8", "name": "currentZone" },
+            { "type": "uint256", "name": "currentZoneBottomPrice" },
+            { "type": "uint256", "name": "currentZoneTopPrice" },
+            { "type": "uint256", "name": "buybackLimit" },
+            { "type": "uint256", "name": "sellbackLimit" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "updatePriceFetcherAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newPriceFetcherAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateSecondServiceContractAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "address", "name": "_newSecondServiceContractAddress" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateSecondServiceWalletAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "address", "name": "_newSecondServiceWalletAddress" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateTaxManagerAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newTaxManagerAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateThirdServiceWalletAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        { "type": "address", "name": "_newThirdServiceWalletAddress" }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateTreasuryContractAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newTreasuryContractAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateTreasuryWalletAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newTreasuryWalletAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateUSDCAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newUSDCAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateUniswapFactoryAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newUniswapFactoryAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateUniswapPairAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newUniswapPairAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateUniswapRouterAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newUniswapRouterAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updateWETHAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newWETHAddress" }],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "updatemetricsTracker",
+      "constant": false,
+      "payable": false,
+      "inputs": [{ "type": "address", "name": "_newmetricsTrackerAddress" }],
+      "outputs": []
+    }
+  ]
+}
