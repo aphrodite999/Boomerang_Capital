@@ -13,6 +13,7 @@ import {
 } from "konsta/react";
 import { Switch } from "@headlessui/react";
 import PortfolioCard from "./sub-components/PortfolioCard";
+import DropdownList from "./sub-components/DropdownList";
 import { TestCapitalAbi } from "./../contract/testCapitalAbi";
 import { DividendTrackerAbi } from "./../contract/dividendTrackerAbi";
 import { BondingDepositoryAbi } from "./../contract/bondingDepositoryAbi";
@@ -47,6 +48,7 @@ function Leverage({ user, network, signer, onConnectWallet }) {
       bondHolderVestingTimeRemaining: "",
       bondHolderBondingTime: "",
     });
+
   const [safeLeverageDetails, setSafeLeverageDetails] = React.useState({
     position: "",
     WETHOwed: "",
@@ -71,7 +73,9 @@ function Leverage({ user, network, signer, onConnectWallet }) {
     bondingDepository,
     safeLeverage,
     priceFetcher,
-    testCapTaxManager;
+    testCapTaxManager,
+    tBD,
+    totalCollateral = 0;
   if (signer) {
     testCapital = new ethers.Contract(
       TestCapitalAddress,
@@ -206,6 +210,41 @@ function Leverage({ user, network, signer, onConnectWallet }) {
       console.log("Error", error.message);
     }
   };
+
+  const fetchBondingTableDetails = async () => {
+    try {
+      const lastAssetIndex = await bondingDepository
+        .getTotalNumberOfBondingTerms()
+        .then((res) => {
+          return parseInt(res._hex, 16) - 1;
+        });
+
+      for (let i = 0; i < lastAssetIndex; i++) {
+        let Asset_Bonded = await bondingDepository
+          .getAssetBondedByBondID(i)
+          .then((res) => {
+            return res; // Return String
+          });
+        let Token_Price = await bondingDepository
+          .getTokenPriceByBondID(i)
+          .then((res) => {
+            return parseInt(res._hex, 16)/1e18;
+          });
+
+        setBondingTableDetail((bondingTableDetail) => [
+          {
+            assetsBonded: Asset_Bonded,
+            tokenPrice: Token_Price,
+          },
+        ]);
+      }
+
+
+    }
+    catch (error) {
+      console.log("Error", error.message);
+    }
+  }
   // Fetch Bonding Depository Details ----------------------------------------------------------------------
   const fetchSafeLeverageDetails = async () => {
     try {
@@ -312,7 +351,9 @@ function Leverage({ user, network, signer, onConnectWallet }) {
     fetchTestCapitalDetails();
     fetchDividendTrackerDetails();
     fetchBondingDepositoryDetails();
+    fetchBondingTableDetails();
     fetchSafeLeverageDetails();
+    fetchTokentoMarket();
     fetchPriceFetcherDetails();
     fetchTestCapTaxManagerDetails();
   }, [signer]);
@@ -321,8 +362,8 @@ function Leverage({ user, network, signer, onConnectWallet }) {
     return argument === ""
       ? "Loading..."
       : unit === ""
-      ? argument
-      : argument + " " + unit;
+        ? argument
+        : argument + " " + unit;
   };
 
   const leverageSummary = [
@@ -342,26 +383,26 @@ function Leverage({ user, network, signer, onConnectWallet }) {
       title: "BOOM Backing Price",
       value: loadChecker(
         testCapTaxManagerDetails.currentBackingPrice *
-          priceFetcherDetails.WETHPriceInUSDC18Dec,
+        priceFetcherDetails.WETHPriceInUSDC18Dec,
         "USDC"
       ),
-      button: "Claim",
+      button: safeLeverageDetails.position != 0 ? "Claim" : "",
       claimable: false,
     },
     {
       title: "Liquidation Price",
       value: loadChecker(
         safeLeverageDetails.liquidationPrice *
-          priceFetcherDetails.WETHPriceInUSDC18Dec,
+        priceFetcherDetails.WETHPriceInUSDC18Dec,
         "USDC"
       ),
-      button: "Claim",
+      button: safeLeverageDetails.position != 0 ? "Claim" : "",
       claimable: false,
     },
     {
       title: "Leverage %",
       value: loadChecker(safeLeverageDetails.userLeverageBPS, "%"),
-      button: "Close Position",
+      button: safeLeverageDetails.position != 0 ? "Close Position" : "",
       claimable: false,
     },
   ];
@@ -370,12 +411,19 @@ function Leverage({ user, network, signer, onConnectWallet }) {
   const [collateralFromWallet, setCollateralFromWallet] = React.useState(0);
   const [collateralFromBonds, setCollateralFromBonds] = React.useState(0);
   const [leveragePercentage, setLeveragePercentage] = React.useState(0);
+  const [bondingTableDetail, setBondingTableDetail] = React.useState([{
+    assetsBonded: "",
+    tokenPrice: "",
+  }]);
+  const [tokentoBond, setTokentoBond] = React.useState(0);
+  const [maxBondToken, setMaxBondToken] = React.useState(0);
+  const [tokentoMarket, setTokentoMarket] = React.useState(0);
   // section - 2
   const handlePositionButton = () => {
     if (
       safeLeverageDetails.position > 0 &&
       collateralFromWallet + collateralFromBonds <
-        safeLeverageDetails.minimumTokensToLeverage
+      safeLeverageDetails.minimumTokensToLeverage
     ) {
       testCapital
         .increaseCollateral(collateralFromWallet, collateralFromBonds)
@@ -391,11 +439,32 @@ function Leverage({ user, network, signer, onConnectWallet }) {
     return argument === ""
       ? "Loading..."
       : unit === ""
-      ? argument
-      : argument.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") +
+        ? argument
+        : argument.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") +
         " " +
         unit;
   };
+
+  const fetchTokentoMarket = async () => {
+    try {
+      tBD = await safeLeverage
+        .getMaximumTokensAvalibleToBuy(user, leveragePercentage, totalCollateral, 9000)
+        .then((res) => {
+          if (safeLeverageDetails.position === 0) {
+            return (user, leveragePercentage * 100, totalCollateral * 10 ^ 18, 9000) / 1e18;
+          }
+          if (safeLeverageDetails.position > 0) {
+            return (user, leveragePercentage * 100, 0, 9000) / 1e18;
+          }
+        });
+    }
+    catch (error) {
+      console.log("fetchTokentoMarket Error : ", error.message);
+    }
+  }
+
+
+
   // // intFormator ------------------------
   // const decimalFormator = (argument) => {
   //   if (argument >= 1000) return argument;
@@ -457,9 +526,9 @@ function Leverage({ user, network, signer, onConnectWallet }) {
                     </span>
                   </div>
                   {/* cards */}
-                  
+
                   {leverageSummary.map((status, index) => (
-                    
+
                     <PortfolioCard
                       key={index}
                       title={status.title}
@@ -468,7 +537,7 @@ function Leverage({ user, network, signer, onConnectWallet }) {
                       button={status.button}
                       handleButton={handleButton}
                     />
-                  
+
                   ))}
                 </div>
               </div>
@@ -501,11 +570,10 @@ function Leverage({ user, network, signer, onConnectWallet }) {
                       {/* slider*/}
                       <List className="my-0 p-0">
                         <ListItem
-                          className={`${
-                            testCapitalDetails.userBalance > 0
-                              ? "text-gray-700 my-0"
-                              : "text-gray-300 my-0"
-                          } `}
+                          className={`${testCapitalDetails.userBalance > 0
+                            ? "text-gray-700 my-0"
+                            : "text-gray-300 my-0"
+                            } `}
                           innerClassName="flex space-x-2"
                           innerChildren={
                             <>
@@ -539,11 +607,10 @@ function Leverage({ user, network, signer, onConnectWallet }) {
                       {/* slider*/}
                       <List className="my-0 p-0">
                         <ListItem
-                          className={`${
-                            bondingDepositoryDetails.bondHolderTokenVesting > 0
-                              ? "text-gray-700 my-0"
-                              : "text-gray-300 my-0"
-                          } `}
+                          className={`${bondingDepositoryDetails.bondHolderTokenVesting > 0
+                            ? "text-gray-700 my-0"
+                            : "text-gray-300 my-0"
+                            } `}
                           innerClassName="flex space-x-2"
                           innerChildren={
                             <>
@@ -574,19 +641,18 @@ function Leverage({ user, network, signer, onConnectWallet }) {
                     <h6 className="py-2 text-base font-bold ">
                       {"Total collateral: "}
                       <span className="font-normal">
-                        {collateralFromWallet + collateralFromBonds}
+                        {totalCollateral = collateralFromWallet + collateralFromBonds}
                       </span>
                     </h6>
                     <div className="flex items-center justify-between text-base font-bold ">
                       <h6 className="py-2">
                         {"Minimum collateral: "}
                         <span
-                          className={`font-normal ${
-                            collateralFromWallet + collateralFromBonds <
+                          className={`font-normal ${totalCollateral <
                             safeLeverageDetails.minimumTokensToLeverage
-                              ? "text-red-500"
-                              : "text-gray-500"
-                          }`}
+                            ? "text-red-500"
+                            : "text-gray-500"
+                            }`}
                         >
                           {formator(
                             safeLeverageDetails.minimumTokensToLeverage,
@@ -597,13 +663,12 @@ function Leverage({ user, network, signer, onConnectWallet }) {
                       {safeLeverageDetails.position > 0 ? (
                         <button
                           onClick={handlePositionButton}
-                          className={`text-sm block py-2 px-4 bg-gradient-to-r ${
-                            safeLeverageDetails.position > 0 &&
-                            collateralFromWallet + collateralFromBonds <
-                              safeLeverageDetails.minimumTokensToLeverage
-                              ? "from-gradient_from to-gradient_to hover:from-gradient_to hover:to-gradient_from"
-                              : " from-gray-600 to-slate-700 hover:to-gray-600 hover:from-slate-700"
-                          } text-green-100 hover:text-white  rounded-lg shadow hover:shadow-md transition duration-300`}
+                          className={`text-sm block py-2 px-4 bg-gradient-to-r ${safeLeverageDetails.position > 0 &&
+                            totalCollateral <
+                            safeLeverageDetails.minimumTokensToLeverage
+                            ? "from-gradient_from to-gradient_to hover:from-gradient_to hover:to-gradient_from"
+                            : " from-gray-600 to-slate-700 hover:to-gray-600 hover:from-slate-700"
+                            } text-green-100 hover:text-white  rounded-lg shadow hover:shadow-md transition duration-300`}
                         >
                           Increase Collateral
                         </button>
@@ -716,30 +781,145 @@ function Leverage({ user, network, signer, onConnectWallet }) {
                     </span>
                   </div>
                   {/* row - 1 */}
+                  {enabledBuy ? (
+                    <>
+                      <div className="text-xs block py-2 px-4 mb-2 bg-gradient-to-r from-[#1da0f221] to-[#35D0F221] hover:from-[#35D0F221] hover:to-[#1da0f221] border border-[#35cff270] text-gray-700 hover:text-gray-900 rounded-lg shadow hover:shadow-md transition duration-300">
+                        {/* {safeLeverageDetails.position != 0 ? */}
+                        <div className="flex items-center justify-between text-base font-bold ">
+                          <h6 className="py-2">
+                            Market Buy
+                          </h6>
+                          <span className="font-normal">
+                            <Switch
+                              checked={enabledBuy}
+                              onChange={
+                                // safeLeverageDetails.isMarketBuyingOfTokensAvalible &&
+                                () => setEnabledBuy(!enabledBuy)
+                              }
+                              className={`${enabledBuy ? "bg-primary" : "bg-gray-200"
+                                } relative inline-flex h-6 w-11 items-center rounded-full`}
+                            >
+                              <span className="sr-only">Enable notifications</span>
+                              <span
+                                className={`${enabledBuy ? "translate-x-6" : "translate-x-1"
+                                  } inline-block h-4 w-4 transform rounded-full bg-white`}
+                              />
+                            </Switch>
+                          </span>
+                        </div>
+
+                      </div>
+                      <div className="text-xs block py-2 px-4 mb-2 bg-gradient-to-r from-[#1da0f221] to-[#35D0F221] hover:from-[#35D0F221] hover:to-[#1da0f221] border border-[#35cff270] text-gray-700 hover:text-gray-900 rounded-lg shadow hover:shadow-md transition duration-300">
+                        <div className="flex items-center justify-between text-base font-bold ">
+                          <h6 className="py-2">{"Token to Market Buy: "}</h6>
+                          {/* slider*/}
+                          {console.log("Max value for Market : ", tBD)}
+                          <List className="my-0 p-0">
+                            <ListItem
+                              className={"text-gray-700 my-0"}
+                              innerClassName="flex space-x-2"
+                              innerChildren={
+                                <>
+                                  <span>0</span>
+                                  <Range
+                                    className="my-0"
+                                    value={tokentoMarket}
+                                    step={1}
+                                    min={0}
+                                    max={tBD}
+                                    onChange={(e) =>
+                                      setTokentoMarket(e.target.value)
+                                    }
+                                  />
+                                  {/* <span>{bondDetails.amountLeft}</span>{" "} */}
+                                  <span>{tokentoMarket}</span>
+                                </>
+                              }
+                            />
+                          </List>
+
+                          {/* end slider */}
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="text-xs block py-2 px-4 mb-2 bg-gradient-to-r from-[#1da0f221] to-[#35D0F221] hover:from-[#35D0F221] hover:to-[#1da0f221] border border-[#35cff270] text-gray-700 hover:text-gray-900 rounded-lg shadow hover:shadow-md transition duration-300">
+                        {/* {safeLeverageDetails.position != 0 ? */}
+                        <div className="flex items-center justify-between text-base font-bold ">
+                          <h6 className="py-2">
+                            Bond
+                          </h6>
+                          <span className="font-normal">
+                            <Switch
+                              checked={enabledBuy}
+                              onChange={
+                                // safeLeverageDetails.isMarketBuyingOfTokensAvalible &&
+                                () => setEnabledBuy(!enabledBuy)
+                              }
+                              className={`${enabledBuy ? "bg-primary" : "bg-gray-200"
+                                } relative inline-flex h-6 w-11 items-center rounded-full`}
+                            >
+                              <span className="sr-only">Enable notifications</span>
+                              <span
+                                className={`${enabledBuy ? "translate-x-6" : "translate-x-1"
+                                  } inline-block h-4 w-4 transform rounded-full bg-white`}
+                              />
+                            </Switch>
+                          </span>
+                        </div>
+
+                        <div className="text-xs block py-2 px-4 mb-2 bg-gradient-to-r from-[#1da0f221] to-[#35D0F221] hover:from-[#35D0F221] hover:to-[#1da0f221] border border-[#35cff270] text-gray-700 hover:text-gray-900 rounded-lg shadow hover:shadow-md transition duration-300">
+                          {console.log("bondingTableDetail : ", bondingTableDetail)}
+                          <DropdownList bondingTableDetail={bondingTableDetail} setMaxBondToken={(val) => { setMaxBondToken(val) }}></DropdownList>
+                        </div>
+                        <div className="text-xs block py-2 px-4 mb-2 bg-gradient-to-r from-[#1da0f221] to-[#35D0F221] hover:from-[#35D0F221] hover:to-[#1da0f221] border border-[#35cff270] text-gray-700 hover:text-gray-900 rounded-lg shadow hover:shadow-md transition duration-300">
+                          <div className="flex items-center justify-between text-base font-bold ">
+                            <h6 className="py-2">{"Token to Bond: "}</h6>
+                            {/* slider*/}
+                            {console.log("Max value for Bond : ", maxBondToken)}
+                            <List className="my-0 p-0">
+                              <ListItem
+                                className={"text-gray-700 my-0"}
+                                innerClassName="flex space-x-4"
+                                innerChildren={
+                                  <>
+                                    <span>0</span>
+                                    <Range
+                                      className="my-0"
+                                      value={tokentoBond}
+                                      step={1e-18}
+                                      min={0}
+                                      max={maxBondToken}
+                                      onChange={(e) =>
+                                        setTokentoBond(e.target.value)
+                                      }
+                                      
+                                    />
+                                    {/* <span>{bondDetails.amountLeft}</span>{" "} */}
+                                    <span style={{width:'60px'}}>{ tokentoBond ? tokentoBond : maxBondToken }</span>
+                                  </>
+                                }
+                              />
+                            </List>
+
+                            {/* end slider */}
+                          </div>
+                        </div>
+                      </div>
+
+                    </>
+
+                  )
+                  }
+                  {/* row - 2*/}
                   <div className="text-xs block py-2 px-4 mb-2 bg-gradient-to-r from-[#1da0f221] to-[#35D0F221] hover:from-[#35D0F221] hover:to-[#1da0f221] border border-[#35cff270] text-gray-700 hover:text-gray-900 rounded-lg shadow hover:shadow-md transition duration-300">
                     <div className="flex items-center justify-between text-base font-bold ">
-                      <h6 className="py-2">
-                        {enabledBuy ? "Market Buy" : "Bond"}
-                      </h6>
-                      <span className="font-normal">
-                        <Switch                        
-                          checked={enabledBuy}
-                          onChange={
-                            // safeLeverageDetails.isMarketBuyingOfTokensAvalible &&
-                            ()=>setEnabledBuy(!enabledBuy)
-                          }
-                          className={`${
-                            enabledBuy ? "bg-primary" : "bg-gray-200"
-                          } relative inline-flex h-6 w-11 items-center rounded-full`}
-                        >
-                          <span className="sr-only">Enable notifications</span>
-                          <span
-                            className={`${
-                              enabledBuy ? "translate-x-6" : "translate-x-1"
-                            } inline-block h-4 w-4 transform rounded-full bg-white`}
-                          />
-                        </Switch>
-                      </span>
+                      {safeLeverageDetails.position === 0 ?
+                        <button className={`${(totalCollateral === 0 && leveragePercentage === 0) ? "bg-gray-200 text-base" : "bg-primary text-green-100 hover:text-white"} bg-primary text-sm block py-2 px-4 rounded-lg shadow hover:shadow-md transition duration-300`} >Create Leverage</button>
+                        :
+                        <button className={`text-sm block py-2 px-4 bg-gray-200 text-base rounded-lg shadow hover:shadow-md transition duration-300`} >Increase Leverage</button>
+                      }
                     </div>
                   </div>
                 </div>

@@ -51,6 +51,13 @@ function Portfolio({ user, network, onConnectWallet, signer }) {
         " " +
         unit;
   };
+
+  const standardFormater = (number) => {
+    if(number > 10^6)
+    {
+      return (number / 1000000)
+    }
+  };
   // Formator -------------------------------------------------------------------------------------------->>>
   // ------------------------------------------------------------------------- useEffect
   const [testCapitalDetails, setTestCapitalDetails] = React.useState({
@@ -177,7 +184,7 @@ function Portfolio({ user, network, onConnectWallet, signer }) {
       const bondHolderTokenVesting = await bondingDepository
         .getBondHolderTokenVesting(user)
         .then((balance) => {
-          return parseInt(balance._hex, 16) / 1e18;
+          return parseInt(balance._hex, 16);
         });
       const bondHolderAvgPriceOfVB = await bondingDepository
         .getBondHolderAveragePriceOfVestingBonds(user)
@@ -294,14 +301,14 @@ function Portfolio({ user, network, onConnectWallet, signer }) {
     },
     {
       title: "Held in Wallet",
-      value: priceFormater(testCapitalDetails.userBalance / 1e18, "BOOM"),
+      value: priceFormater(testCapitalDetails.userBalance , "BOOM"),
       button: "",
       claimable: false,
     },
     {
       title: "Vesting in Bounds",
       value: priceFormater(
-        bondingDepositoryDetails.bondHolderTokenVesting / 1e18,
+        bondingDepositoryDetails.bondHolderTokenVesting,
         "BOOM"
       ),
       button: "",
@@ -309,13 +316,13 @@ function Portfolio({ user, network, onConnectWallet, signer }) {
     },
     {
       title: "Leveraged Position",
-      value: priceFormater(safeLeverageDetails.position / 1e18, "ETH"),
+      value: priceFormater(safeLeverageDetails.position, "ETH"),
       button: "",
       claimable: false,
     },
     {
       title: "Owned to Treasury",
-      value: priceFormater(safeLeverageDetails.WETHOwed / 1e18, "BOOM"),
+      value: priceFormater(safeLeverageDetails.WETHOwed, "BOOM"),
       button: "",
       claimable: false,
     },

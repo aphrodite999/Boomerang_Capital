@@ -525,6 +525,7 @@ function Bonding({ user, signer, network, onConnectWallet, triggerPopup }) {
                     </th>
                   </tr>
                 </thead>
+                {console.log("BondingTableDetailsLength : ",bondingTableDetails.length)}
                 {bondingTableDetails.length > 0 ? (
                   <tbody className="text-gray-700 bg-white">
                     {bondingTableDetails.map((wallet, index) => {
