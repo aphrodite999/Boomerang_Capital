@@ -51,7 +51,7 @@ export default function App() {
       await window.ethereum.enable();
       const accounts = await ethereum.request({ method: 'eth_accounts' });
 
-      if (accounts.length != 0) {
+      if (accounts.length !== 0) {
         const account = accounts[0];
         console.log("Found an authorized account:", account);
         setUser(account);
